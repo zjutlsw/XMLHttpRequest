@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ 
+    <input type='file' id='file' />
+    进度：<progress value="0" max="100"></progress> <span class="percent">0%</span>
+    速度：<span class="speed">0 b/s</span>
+    <button>开始上传</button>
+    <button>结束上传</button>
+
+    <script>
+        const xhr=new XMLHttpRequest();
+        const btn=document.querySelectorAll("button");
+
+       
+        btn[1].onclick=function(){
+            xhr.abort();
+        }
+        btn[0].onclick=function(){
+        
+            xhr.open("post","/upload",true);
+            // const data='username=11&password=22';
+            // xhr.setRequestHeader("content-type",'application/x-www-form-urlencoded');
+            xhr.onload=function(res){
+                console.log(xhr.response);
+            }
+            let stime,sload,etime;
+            xhr.upload.onloadstart=function(){
+                stime=new Date().getTime();
+                sload=0;
+                console.log(stime)
+            }
+            xhr.onabort=function(){
+                console.log("种植拉")
+            }
+            xhr.upload.onprogress=function(ev){
+                console.log(ev)
+                const progress=(ev.loaded/ev.total*100).toFixed(0);
+                document.querySelector('progress').value=progress;
+                document.querySelector(".percent").innerText=progress+"%"
+                etime=new Date().getTime();
+                const diffTime=(etime-stime)/1000;
+                const diffUpload=ev.loaded-sload;
+                let speed=diffUpload/diffTime;
+                let unit='b/s';
+                if(speed>=1024){
+                    speed=speed/1024;
+                    unit='k/s'
+                }
+                speed=speed.toFixed(2)
+                document.querySelector(".speed").innerText=speed+unit
+                stime=etime,
+                sload=ev.loaded;
+            }
+            const form=new FormData();
+            const file=document.querySelector("#file").files[0];
+            form.append("img",file);
+            form.append("username",'子不语');
+            xhr.send(form);
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "xmlhttprequest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zjutlsw/xmlhttprequest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zjutlsw/xmlhttprequest/issues"
+  },
+  "homepage": "https://github.com/zjutlsw/xmlhttprequest#readme",
+  "dependencies": {
+    "koa": "^2.13.0",
+    "koa-body": "^4.2.0",
+    "koa-router": "^9.1.0",
+    "koa-static": "^5.0.0"
+  }
+}
