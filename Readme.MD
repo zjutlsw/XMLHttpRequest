@@ -10,7 +10,7 @@
 通过append方法添加参数或者文件
 可以通过xhr.upload的一些属性监听上传内容
 
-onprogress上传过程中
+ onprogress上传进度 ev.loaded 已上传大小   ev.total 文件大小
 onloadstart 开始上传
 onloadend 上传结束
-onbort 
+onbort 触发终止
